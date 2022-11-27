@@ -36,12 +36,11 @@ Coming soon
 **or**
 
 using GNU make:
-    git clone https://github.com/halbornlabs/ZIIONext.git
-    cd ZIIONext
-    make install
-
-
-***
+```bash
+git clone https://github.com/halbornlabs/ZIIONext.git
+cd ZIIONext
+make install
+```
 
 
 ## Credits
