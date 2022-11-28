@@ -4,10 +4,10 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 
 const Constants = Me.imports.constants;
-const {Adw, Gtk, Gdk, Gio, GLib, GObject} = imports.gi;
+const { Adw, Gtk, Gdk, Gio, GLib, GObject } = imports.gi;
 
 // Create all the customization options
-var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget extends Adw.PreferencesPage{
+var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget extends Adw.PreferencesPage {
     _init(settings, IconGrid) {
         super._init({
             margin_top: 24,
@@ -36,16 +36,16 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
         // Icons
 
         let iconsRow = new Adw.ActionRow({
-            title:"Icon"
+            title: "Icon"
         });
 
         let iconsFlowBox = new IconGrid();
-        iconsFlowBox.connect('child-activated', ()=> {
+        iconsFlowBox.connect('child-activated', () => {
             let selectedChild = iconsFlowBox.get_selected_children();
             let selectedChildIndex = selectedChild[0].get_index();
             this._settings.set_int('menu-button-icon-image', selectedChildIndex);
         });
-        Constants.DistroIcons.forEach((icon)=>{
+        Constants.DistroIcons.forEach((icon) => {
             let iconName = icon.PATH.replace("/Resources/", '');
             iconName = iconName.replace(".svg", '');
             let iconImage = new Gtk.Image({
@@ -58,8 +58,8 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
         iconsRow.add_suffix(iconsFlowBox);
 
         let children = iconsFlowBox.childrenCount;
-        for(let i = 0; i < children; i++){
-            if(i === this._settings.get_int('menu-button-icon-image')){
+        for (let i = 0; i < children; i++) {
+            if (i === this._settings.get_int('menu-button-icon-image')) {
                 iconsFlowBox.select_child(iconsFlowBox.get_child_at_index(i));
                 break;
             }
@@ -89,7 +89,7 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
             value_pos: Gtk.PositionType.RIGHT
         });
 
-        menuButtonIconSizeScale.set_format_value_func( (scale, value) => {
+        menuButtonIconSizeScale.set_format_value_func((scale, value) => {
             return "\t" + value + "px";
         });
 
@@ -102,7 +102,7 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
 
         //iconGroup
         iconGroup.add(iconsRow);
-        iconGroup.add( menuButtonIconSizeRow)
+        iconGroup.add(menuButtonIconSizeRow)
 
         this.add(iconGroup);
 
@@ -110,10 +110,10 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
 
         let clickType = this._settings.get_int('menu-button-icon-click-type');
         let menuButtonIconClickTypeRow = new Adw.ActionRow({
-            title:"Icon Click Type to open Activities"
+            title: "Icon Click Type to open Activities"
         });
 
-        let menuButtonIconClickTypeCombo= new Gtk.ComboBoxText({
+        let menuButtonIconClickTypeCombo = new Gtk.ComboBoxText({
             valign: Gtk.Align.CENTER
         });
         menuButtonIconClickTypeCombo.append("1", "Left Click ");
@@ -131,7 +131,7 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
 
         let extensionApp = this._settings.get_string('menu-button-extensions-app');
         let menuButtonExtensionsAppRow = new Adw.ActionRow({
-            title:"Preferred Extensions Application"
+            title: "Preferred Extensions Application"
         });
 
         let menuButtonExtensionsAppCombo = new Gtk.ComboBoxText({
@@ -150,7 +150,7 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
         // Choose Terminal
 
         let menuButtonTerminalRow = new Adw.ActionRow({
-            title:"Terminal"
+            title: "Terminal"
         });
 
         // Change Terminal and build it's option in prefs
@@ -170,7 +170,7 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
         // Change Software Center and build it's option in prefs
 
         let menuButtonSCRow = new Adw.ActionRow({
-            title:"Software Center"
+            title: "Software Center"
         });
         let currentSoftwareCenter = this._settings.get_string('menu-button-software-center');
 
@@ -206,7 +206,7 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
             title: "Hide Force Quit option"
         });
 
-        let showFQOptionsSwitch= new Gtk.Switch({
+        let showFQOptionsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });
 
@@ -223,7 +223,7 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
             title: "Show Lock Screen option"
         });
 
-        let showLCOptionsSwitch= new Gtk.Switch({
+        let showLCOptionsSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });
 
@@ -236,10 +236,10 @@ var ZIIONextOptionsWidget = GObject.registerClass(class ZIIONext_OptionsWidget e
 
         // Toggle Software centre option and build it's option in prefs
         let softwareCentreOptionRow = new Adw.ActionRow({
-            title:"Hide Software Centre option"
+            title: "Hide Software Centre option"
         });
 
-        let hideSCOptionSwitch= new Gtk.Switch({
+        let hideSCOptionSwitch = new Gtk.Switch({
             valign: Gtk.Align.CENTER,
         });
 
@@ -271,8 +271,8 @@ function fillPrefsWindow(window, IconGrid, Settings) {
     let options = new ZIIONextOptionsWidget(Settings, IconGrid);
 
     let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-    if(!iconTheme.get_search_path().includes(Me.path + "/Resources"))
-    iconTheme.add_search_path(Me.path + "/Resources");
+    if (!iconTheme.get_search_path().includes(Me.path + "/Resources"))
+        iconTheme.add_search_path(Me.path + "/Resources");
 
     window.add(options);
     window.search_enabled = true;

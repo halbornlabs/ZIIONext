@@ -1,7 +1,7 @@
 // -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*-
 const Me = imports.misc.extensionUtils.getCurrentExtension();
 
-const {Gio, GLib, GObject, Shell, St} = imports.gi;
+const { Gio, GLib, GObject, Shell, St } = imports.gi;
 const Constants = Me.imports.constants;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Main = imports.ui.main
@@ -43,13 +43,13 @@ function _logOut() {
 }
 
 function _appGrid() {
-    // Code snippet from - https://github.com/G-dH/custom-hot-corners-extended/blob/gdh/actions.js
-    // Pressing the apps btn before overview activation avoids icons animation in GS 3.36/3.38
-    Main.overview.dash.showAppsButton.checked = true;
-    // in 3.36 pressing the button is usualy enough to activate overview, but not always
-    Main.overview.show();
-    // pressing apps btn before overview has no effect in GS 40, so once again
-    Main.overview.dash.showAppsButton.checked = true;
+	// Code snippet from - https://github.com/G-dH/custom-hot-corners-extended/blob/gdh/actions.js
+	// Pressing the apps btn before overview activation avoids icons animation in GS 3.36/3.38
+	Main.overview.dash.showAppsButton.checked = true;
+	// in 3.36 pressing the button is usualy enough to activate overview, but not always
+	Main.overview.show();
+	// pressing apps btn before overview has no effect in GS 40, so once again
+	Main.overview.dash.showAppsButton.checked = true;
 }
 
 function _forceQuit() {
@@ -96,7 +96,7 @@ var MenuButton = GObject.registerClass(class ZIIONext_MenuButton extends PanelMe
 		this.connect('button-press-event', _middleClick.bind(this));
 	}
 
-	toggleOptions(){
+	toggleOptions() {
 		let poweroption_state = this._settings.get_boolean('show-power-options')
 		let forcequit_state = this._settings.get_boolean('hide-forcequit')
 		let lockscreen_state = this._settings.get_boolean('show-lockscreen')
@@ -127,14 +127,14 @@ var MenuButton = GObject.registerClass(class ZIIONext_MenuButton extends PanelMe
 
 		if (!softwarecenter_state) {
 			this.item7 = new PopupMenu.PopupMenuItem('Software Center...')
-            this.item7.connect('activate', () => this.softwareStore())
+			this.item7.connect('activate', () => this.softwareStore())
 			this.menu.addMenuItem(this.item7)
-        }
+		}
 
 		this.menu.addMenuItem(this.item8)
 		this.menu.addMenuItem(this.item9)
 
-		if(!forcequit_state) {
+		if (!forcequit_state) {
 			this.item10 = new PopupMenu.PopupSeparatorMenuItem()
 			this.menu.addMenuItem(this.item10)
 			this.item11 = new PopupMenu.PopupMenuItem('Force Quit App')
@@ -189,7 +189,7 @@ var MenuButton = GObject.registerClass(class ZIIONext_MenuButton extends PanelMe
 	}
 
 	extensions() {
-    const appSys = imports.gi.Shell.AppSystem.get_default();
+		const appSys = imports.gi.Shell.AppSystem.get_default();
 		let extensionmanager_choice = this._settings.get_string('menu-button-extensions-app');
 		let extensionApp = appSys.lookup_app(extensionmanager_choice)
 		if (extensionApp) {
@@ -205,17 +205,17 @@ var MenuButton = GObject.registerClass(class ZIIONext_MenuButton extends PanelMe
 		}
 	}
 
-	setIconImage(){
+	setIconImage() {
 		let iconIndex = this._settings.get_int('menu-button-icon-image');
 		let path = Me.path + Constants.DistroIcons[iconIndex].PATH;
-		if(Constants.DistroIcons[iconIndex].PATH === 'start-here-symbolic')
+		if (Constants.DistroIcons[iconIndex].PATH === 'start-here-symbolic')
 			path = 'start-here-symbolic';
-		else if(!GLib.file_test(path, GLib.FileTest.IS_REGULAR))
+		else if (!GLib.file_test(path, GLib.FileTest.IS_REGULAR))
 			path = 'start-here-symbolic';
 		this.icon.gicon = Gio.icon_new_for_string(path);
 	}
 
-	setIconSize(){
+	setIconSize() {
 		let iconSize = this._settings.get_int('menu-button-icon-size');
 		this.icon.icon_size = iconSize;
 	}

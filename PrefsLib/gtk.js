@@ -4,10 +4,10 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 
 const Constants = Me.imports.constants;
-const {Gtk, Gdk, Gio, GLib, GObject} = imports.gi;
+const { Gtk, Gdk, Gio, GLib, GObject } = imports.gi;
 
 
-var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_PreferencesWidget extends Gtk.Box{
+var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_PreferencesWidget extends Gtk.Box {
     _init(IconGrid, shellVersion, Settings) {
         super._init({
             orientation: Gtk.Orientation.VERTICAL,
@@ -35,20 +35,20 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             margin_end: 5
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             iconsFrame.add(iconsBox);
         }
-        else{
+        else {
             iconsFrame.set_child(iconsBox);
         }
 
         let iconsFlowBox = new IconGrid();
-        iconsFlowBox.connect('child-activated', ()=> {
+        iconsFlowBox.connect('child-activated', () => {
             let selectedChild = iconsFlowBox.get_selected_children();
             let selectedChildIndex = selectedChild[0].get_index();
             this._settings.set_int('menu-button-icon-image', selectedChildIndex);
         });
-        Constants.DistroIcons.forEach((icon)=>{
+        Constants.DistroIcons.forEach((icon) => {
             let iconName = icon.PATH.replace("/Resources/", '');
             iconName = iconName.replace(".svg", '');
             let iconImage = new Gtk.Image({
@@ -58,7 +58,7 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             iconsFlowBox.add(iconImage);
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             iconsBox.add(changeIconText)
             iconsBox.add(iconsFlowBox);
             this.add(iconsFrame)
@@ -70,8 +70,8 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
         }
 
         let children = iconsFlowBox.childrenCount;
-        for(let i = 0; i < children; i++){
-            if(i === this._settings.get_int('menu-button-icon-image')){
+        for (let i = 0; i < children; i++) {
+            if (i === this._settings.get_int('menu-button-icon-image')) {
                 iconsFlowBox.select_child(iconsFlowBox.get_child_at_index(i));
                 break;
             }
@@ -107,11 +107,11 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             value_pos: Gtk.PositionType.RIGHT
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             menuButtonIconSizeScale.connect('format-value', (scale, value) => { return value.toString() + ' px'; });
         }
-        else{
-            menuButtonIconSizeScale.set_format_value_func( (scale, value) => {
+        else {
+            menuButtonIconSizeScale.set_format_value_func((scale, value) => {
                 return "\t" + value + "px";
             });
         }
@@ -120,13 +120,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
         menuButtonIconSizeScale.connect('value-changed', () => {
             this._settings.set_int('menu-button-icon-size', menuButtonIconSizeScale.get_value());
         });
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             menuButtonIconSizeBox.add(menuButtonIconSizeLabel);
             menuButtonIconSizeBox.add(menuButtonIconSizeScale);
             menuButtonIconSizeFrame.add(menuButtonIconSizeBox);
             this.add(menuButtonIconSizeFrame);
         }
-        else{
+        else {
             menuButtonIconSizeBox.append(menuButtonIconSizeLabel);
             menuButtonIconSizeBox.append(menuButtonIconSizeScale);
             menuButtonIconSizeFrame.set_child(menuButtonIconSizeBox);
@@ -149,7 +149,7 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             hexpand: true
         });
 
-        let menuButtonIconClickTypeCombo= new Gtk.ComboBoxText();
+        let menuButtonIconClickTypeCombo = new Gtk.ComboBoxText();
         menuButtonIconClickTypeCombo.append("1", "Left Click ");
         menuButtonIconClickTypeCombo.append("2", "Middle Click ");
         menuButtonIconClickTypeCombo.append("3", "Right Click ");
@@ -159,13 +159,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_int('menu-button-icon-click-type', parseInt(menuButtonIconClickTypeCombo.get_active_id()));
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             menuButtonIconClickTypeBox.add(menuButtonIconClickTypeLabel);
             menuButtonIconClickTypeBox.add(menuButtonIconClickTypeCombo);
             menuButtonIconClickTypeFrame.add(menuButtonIconClickTypeBox);
             this.add(menuButtonIconClickTypeFrame);
         }
-        else{
+        else {
             menuButtonIconClickTypeBox.append(menuButtonIconClickTypeLabel);
             menuButtonIconClickTypeBox.append(menuButtonIconClickTypeCombo);
             menuButtonIconClickTypeFrame.set_child(menuButtonIconClickTypeBox);
@@ -197,13 +197,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_string('menu-button-extensions-app', menuButtonExtensionsAppCombo.get_active_id());
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             menuButtonExtensionsAppBox.add(menuButtonExtensionsAppLabel);
             menuButtonExtensionsAppBox.add(menuButtonExtensionsAppCombo);
             menuButtonExtensionsAppFrame.add(menuButtonExtensionsAppBox);
             this.add(menuButtonExtensionsAppFrame);
         }
-        else{
+        else {
             menuButtonExtensionsAppBox.append(menuButtonExtensionsAppLabel);
             menuButtonExtensionsAppBox.append(menuButtonExtensionsAppCombo);
             menuButtonExtensionsAppFrame.set_child(menuButtonExtensionsAppBox);
@@ -237,13 +237,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_string('menu-button-terminal', changeTerminalInput.get_text());
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             menuButtonTerminalBox.add(changeTerminalText);
             menuButtonTerminalBox.add(changeTerminalInput);
             menuButtonTerminalFrame.add(menuButtonTerminalBox);
             this.add(menuButtonTerminalFrame);
         }
-        else{
+        else {
             menuButtonTerminalBox.append(changeTerminalText);
             menuButtonTerminalBox.append(changeTerminalInput);
             menuButtonTerminalFrame.set_child(menuButtonTerminalBox);
@@ -276,13 +276,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_string('menu-button-software-center', changeSoftwareCenterInput.get_text());
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             menuButtonSCBox.add(changeSoftwareCenterText);
             menuButtonSCBox.add(changeSoftwareCenterInput);
             menuButtonSCFrame.add(menuButtonSCBox);
             this.add(menuButtonSCFrame);
         }
-        else{
+        else {
             menuButtonSCBox.append(changeSoftwareCenterText);
             menuButtonSCBox.append(changeSoftwareCenterInput);
             menuButtonSCFrame.set_child(menuButtonSCBox);
@@ -305,7 +305,7 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             hexpand: true
         })
 
-        let showPowerOptionsSwitch= new Gtk.Switch({
+        let showPowerOptionsSwitch = new Gtk.Switch({
             halign: Gtk.Align.END,
         });
 
@@ -314,13 +314,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_boolean('show-power-options', widget.get_active());
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             PowerOptionBox.add(enablePowerOptionText);
             PowerOptionBox.add(showPowerOptionsSwitch);
             PowerOptionFrame.add(PowerOptionBox);
             this.add(PowerOptionFrame);
         }
-        else{
+        else {
             PowerOptionBox.append(enablePowerOptionText);
             PowerOptionBox.append(showPowerOptionsSwitch);
             PowerOptionFrame.set_child(PowerOptionBox);
@@ -343,7 +343,7 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             hexpand: true
         })
 
-        let showFQOptionsSwitch= new Gtk.Switch({
+        let showFQOptionsSwitch = new Gtk.Switch({
             halign: Gtk.Align.END,
         });
 
@@ -352,13 +352,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_boolean('hide-forcequit', widget.get_active());
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             forceQuitOptionBox.add(enableFQOptionText);
             forceQuitOptionBox.add(showFQOptionsSwitch);
             forceQuitOptionFrame.add(forceQuitOptionBox);
             this.add(forceQuitOptionFrame);
         }
-        else{
+        else {
             forceQuitOptionBox.append(enableFQOptionText);
             forceQuitOptionBox.append(showFQOptionsSwitch);
             forceQuitOptionFrame.set_child(forceQuitOptionBox);
@@ -381,7 +381,7 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             hexpand: true
         })
 
-        let showLCOptionsSwitch= new Gtk.Switch({
+        let showLCOptionsSwitch = new Gtk.Switch({
             halign: Gtk.Align.END,
         });
 
@@ -390,13 +390,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_boolean('show-lockscreen', widget.get_active());
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             lockScreenOptionBox.add(enableLSOptionText);
             lockScreenOptionBox.add(showLCOptionsSwitch);
             lockScreenOptionFrame.add(lockScreenOptionBox);
             this.add(lockScreenOptionFrame);
         }
-        else{
+        else {
             lockScreenOptionBox.append(enableLSOptionText);
             lockScreenOptionBox.append(showLCOptionsSwitch);
             lockScreenOptionFrame.set_child(lockScreenOptionBox);
@@ -419,7 +419,7 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             hexpand: true
         })
 
-        let hideSCOptionSwitch= new Gtk.Switch({
+        let hideSCOptionSwitch = new Gtk.Switch({
             halign: Gtk.Align.END,
         });
 
@@ -428,13 +428,13 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
             this._settings.set_boolean('hide-softwarecentre', widget.get_active());
         });
 
-        if (shellVersion < 40){
+        if (shellVersion < 40) {
             softwareCentreOptionBox.add(hideSCOptionText);
             softwareCentreOptionBox.add(hideSCOptionSwitch);
             SoftwareCentreOptionFrame.add(softwareCentreOptionBox);
             this.add(SoftwareCentreOptionFrame);
         }
-        else{
+        else {
             softwareCentreOptionBox.append(hideSCOptionText);
             softwareCentreOptionBox.append(hideSCOptionSwitch);
             SoftwareCentreOptionFrame.set_child(softwareCentreOptionBox);
@@ -446,9 +446,9 @@ var ZIIONextPreferencesWidget = GObject.registerClass(class ZIIONext_Preferences
 
 function getMainPrefs(IconGrid, shellVersion, Settings) {
     let widget = new ZIIONextPreferencesWidget(IconGrid, shellVersion, Settings);
-    if (shellVersion < 40){
+    if (shellVersion < 40) {
         let iconTheme = Gtk.IconTheme.get_default();
-        if(!iconTheme.get_search_path().includes(Me.path + "/Resources"))
+        if (!iconTheme.get_search_path().includes(Me.path + "/Resources"))
             iconTheme.append_search_path(Me.path + "/Resources");
         widget.show_all();
         return widget;
@@ -457,7 +457,7 @@ function getMainPrefs(IconGrid, shellVersion, Settings) {
     var scrollBox = new Gtk.ScrolledWindow();
     scrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
     let iconTheme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default());
-    if(!iconTheme.get_search_path().includes(Me.path + "/Resources"))
+    if (!iconTheme.get_search_path().includes(Me.path + "/Resources"))
         iconTheme.add_search_path(Me.path + "/Resources");
     widget.show();
     scrollBox.set_child(widget);
