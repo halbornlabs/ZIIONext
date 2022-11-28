@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist>
 
-  <schema path="/org/gnome/shell/extensions/ziionext/" id="org.halborn.ziionext">
+  <schema path="/org/gnome/shell/extensions/ziionext/" id="org.gnome.shell.extensions.ziionext">
 
     <key type="i" name="menu-button-icon-image">
       <default>4</default>

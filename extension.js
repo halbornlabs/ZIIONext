@@ -221,8 +221,7 @@ var MenuButton = GObject.registerClass(class ZIIONext_MenuButton extends PanelMe
 	}
 })
 
-function init() {
-}
+function init() { }
 
 function enable() {
 	const activitiesButton = Main.panel.statusArea['activities']

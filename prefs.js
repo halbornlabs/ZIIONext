@@ -8,10 +8,7 @@ const Config = imports.misc.config;
 const [major] = Config.PACKAGE_VERSION.split('.');
 const shellVersion = Number.parseInt(major);
 
-let Settings = ExtensionUtils.getSettings(Me.metadata['settings-schema']);
-
-function init() {
-}
+function init() { }
 
 var IconGrid = GObject.registerClass(class ZIIONext_IconGrid extends Gtk.FlowBox{
     _init() {
@@ -38,11 +35,13 @@ var IconGrid = GObject.registerClass(class ZIIONext_IconGrid extends Gtk.FlowBox
 
 function fillPreferencesWindow(window)
 {
+    let Settings = ExtensionUtils.getSettings(Me.metadata['settings-schema']);
     PrefsLib.adw.fillPrefsWindow(window, IconGrid, Settings);
 }
 
 function buildPrefsWidget()
 {
+    let Settings = ExtensionUtils.getSettings(Me.metadata['settings-schema']);
     return PrefsLib.gtk.getMainPrefs(IconGrid, shellVersion, Settings);
 }
      

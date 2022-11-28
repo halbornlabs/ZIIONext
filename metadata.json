@@ -1,7 +1,7 @@
 {
   "description": "GNOME extension for branding and customisation of Ziion\nThe smart contract auditing VM used by https://halborn.com.\n\nThis extension is a heavily modified fork of https://github.com/Aryan20/Logomenu and uses it as a base. Get more information on ZIION at https://ziion.org.",
   "name": "ZIIONext",
-  "settings-schema": "org.halborn.ziionext",
+  "settings-schema": "org.gnome.shell.extensions.ziionext",
   "shell-version": [
     "3.30",  
     "3.32",
@@ -14,6 +14,6 @@
     "43"
   ],
   "url": "https://github.com/halbornlabs/ZIIONext",
-  "uuid": "ziionext@halborn",
+  "uuid": "ziion@halborn.com",
   "version": 2
 }

@@ -2,6 +2,13 @@
 
 Menu for the GNOME panel with options to provide quick access to system actions and information. It provides a similar experience to the top-left Apple menu on MacOS.
 
+Compatible with and tested on GNOME 43, 42, 41, 40, 3.xx
+
+## Screenshots
+
+![](screenshots/ZIIONext.png)
+
+![](screenshots/ZIIONext-Prefs.png)
 
 ## Options include:
 
@@ -21,29 +28,26 @@ Menu for the GNOME panel with options to provide quick access to system actions 
 
 -Power Options
 
-Compatible with and tested on GNOME 43, 42, 41, 40, 3.xx
-
-
 ## Installation
 
-*  Via **Gnome Extensions**
- 
-Coming soon
+* Via **Gnome Extensions**
 
+Coming soon
 
 * Manually : Grab the latest release and unzip to `.local/share/gnome-shell/extensions/ziionext@halborn/`
 
 **or**
 
 using GNU make:
+
 ```bash
 git clone https://github.com/halbornlabs/ZIIONext.git
 cd ZIIONext
 make install
 ```
 
-
 ## Credits
+
 Heavily modified fork of [Logomenu](https://github.com/Aryan20/Logomenu), which is itself a fork of [Tofu Menu by tofutech](https://github.com/tofutech/tofumenu), forked from [Big-Sur-Menu by Fausto](https://github.com/Fausto-Korpsvart/Big-Sur-Menu), which was forked from [poppy-menu](https://extensions.gnome.org/extension/1279/poppy-menu/)
 
 Original extension creators and all the contributors:
