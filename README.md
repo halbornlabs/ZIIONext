@@ -32,9 +32,11 @@ Compatible with and tested on GNOME 43, 42, 41, 40, 3.xx
 
 * Via **Gnome Extensions**
 
-Coming soon
+[<img src="https://raw.githubusercontent.com/andyholmes/gnome-shell-extensions-badge/master/get-it-on-ego.svg?sanitize=true" height="100">](https://extensions.gnome.org/extension/5559/ziionext/)
 
-* Manually : Grab the latest release and unzip to `.local/share/gnome-shell/extensions/ziionext@halborn/`
+* **Manually**
+
+Grab the latest release and unzip to `.local/share/gnome-shell/extensions/ziionext@halborn/`
 
 **or**
 
